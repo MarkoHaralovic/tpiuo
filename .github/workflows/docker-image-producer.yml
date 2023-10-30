@@ -43,6 +43,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Connect to proper folder
+      uses: actions/checkout@v4
+      with:
+        sparse-checkout: 'prvi_zadatak/'
+    
     - name: Log in to Azure
       uses: azure/login@v1
       with:
@@ -51,8 +56,8 @@ jobs:
     - name: Build and deploy Container App
       uses: azure/container-apps-deploy-action@v1
       with:
-        appSourcePath: $GITHUB_WORKSPACE/prvi_zadatak
-        dockerfilePath: $GITHUB_WORKSPACE/prvi_zadatak/Dockerfile_producer
+        appSourcePath: $GITHUB_WORKSPACE
+        dockerfilePath: Dockerfile_producer
         acrName: mojikontenjeri
         containerAppName: producer-app
         resourceGroup: fervjestina
