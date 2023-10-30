@@ -3,8 +3,12 @@ name: Producer CI
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - '**.py'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - '**.py'
 
 jobs:
   editorconfig:
@@ -39,8 +43,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: List directory contents
-      run: ls -R ${{ github.workspace }}
     - name: Log in to Azure
       uses: azure/login@v1
       with:
@@ -49,8 +51,8 @@ jobs:
     - name: Build and deploy Container App
       uses: azure/container-apps-deploy-action@v1
       with:
-        appSourcePath: ${{ github.workspace }}/prvi_zadatak
-        dockerfilePath: ${{ github.workspace }}/prvi_zadatak/Dockerfile_producer
+        appSourcePath: $GITHUB_WORKSPACE/prvi_zadatak
+        dockerfilePath: $GITHUB_WORKSPACE/prvi_zadatak/Dockerfile_producer
         acrName: mojikontenjeri
         containerAppName: producer-app
         resourceGroup: fervjestina
