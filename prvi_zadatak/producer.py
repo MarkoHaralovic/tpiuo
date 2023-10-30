@@ -5,16 +5,21 @@ from azure.eventhub.aio import EventHubProducerClient
 
 EVENT_HUB_CONNECTION_STR = "Endpoint=sb://labos1.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=fenUEfj8GMD1r5u9A36xbh0WqGOoKfHVh+AEhBeuyBM="
 EVENT_HUB_NAME = "labos1_eventhub"
-REDDIT_URL = "https://www.reddit.com/r/dataengineering/top/.json?limit=10&t=all"
+REDDIT_BASE_URL = "https://www.reddit.com/r/dataengineering/top/.json?t=all&limit=10"
 HEADERS = {
     "User-Agent": "Python/urllib"
 }  # gotten from https://github.com/reddit-archive/reddit/wiki/API#rules
 
 
-async def fetch_reddit_top_posts():
-    response = requests.get(REDDIT_URL, headers=HEADERS)
+async def fetch_reddit_top_posts(after=None):
+    url = REDDIT_BASE_URL
+    if after:
+        url += f"&after={after}"
+    
+    response = requests.get(url, headers=HEADERS)
     response.raise_for_status()
-    return response.json().get("data", {}).get("children", [])
+    data = response.json().get("data", {})
+    return data.get("children", []), data.get("after")
 
 
 async def run():
@@ -26,16 +31,21 @@ async def run():
         conn_str=EVENT_HUB_CONNECTION_STR, eventhub_name=EVENT_HUB_NAME
     )
     async with producer:
-        top_posts = await fetch_reddit_top_posts()
-        event_data_batch = await producer.create_batch()
-        # Add posts to the batch.
-        for post in top_posts:
-            print(post)
-            post_data = post.get("data", {})
-            event_data_batch.add(EventData(str(post_data)))
+        after = None
+        while True:
+            top_posts, after = await fetch_reddit_top_posts(after)
+            if not top_posts:
+                break
+            
+            event_data_batch = await producer.create_batch()
+            
+            for post in top_posts:
+                print(post)
+                post_data = post.get("data", {})
+                event_data_batch.add(EventData(str(post_data)))
 
-        # Send the batch of events to the event hub.
-        await producer.send_batch(event_data_batch)
+            await producer.send_batch(event_data_batch)
+            await asyncio.sleep(10) 
 
 
 asyncio.run(run())
