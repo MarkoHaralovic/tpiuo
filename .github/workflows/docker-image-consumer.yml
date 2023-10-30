@@ -39,8 +39,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: List directory contents
-      run: ls -R ${{ github.workspace }}
+    - name: Connect to proper folder
+      uses: actions/checkout@v4
+      with:
+        sparse-checkout: 'prvi_zadatak/'
     - name: Log in to Azure
       uses: azure/login@v1
       with:
