@@ -51,3 +51,4 @@ jobs:
         acrName: mojikontenjeri
         containerAppName: producer-app
         resourceGroup: fervjestina
+        dockerfilePath: /home/runner/work/tpiuo/blob/main/prvi_zadatak/Dockerfile_producer
