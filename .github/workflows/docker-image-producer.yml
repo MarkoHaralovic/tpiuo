@@ -47,7 +47,8 @@ jobs:
     - name: Build and deploy Container App
       uses: azure/container-apps-deploy-action@v1
       with:
-        appSourcePath: prvi_zadatak/
+        appSourcePath: ${{ github.workspace }}
         acrName: mojikontenjeri
         containerAppName: producer-app
         resourceGroup: fervjestina
+        dockerfilePath: prvi_zadatak/Dockerfile_producer
