@@ -51,8 +51,8 @@ jobs:
     - name: Build and deploy Container App
       uses: azure/container-apps-deploy-action@v1
       with:
-        appSourcePath: $GITHUB_WORKSPACE/prvi_zadatak
-        dockerfilePath: $GITHUB_WORKSPACE/prvi_zadatak/Dockerfile_consumer
+        appSourcePath: $GITHUB_WORKSPACE
+        dockerfilePath: Dockerfile_consumer
         acrName: mojikontenjeri
         containerAppName: consumer-app
         resourceGroup: fervjestina
