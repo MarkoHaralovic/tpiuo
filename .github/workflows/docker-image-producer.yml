@@ -48,6 +48,6 @@ jobs:
       uses: azure/container-apps-deploy-action@v1
       with:
         appSourcePath: ${{ github.workspace }}
-        acrName: producer
+        acrName: mh53805@fer.hr
         containerAppName: producer-app
         resourceGroup: fervjestina
