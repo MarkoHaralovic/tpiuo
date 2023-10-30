@@ -51,4 +51,4 @@ jobs:
         acrName: mojikontenjeri
         containerAppName: consumer-app
         resourceGroup: fervjestina
-        dockerfilePath: prvi_zadatak/Dockerfile_consumer
+        dockerfilePath: ${{ github.workspace }}/prvi_zadatak/Dockerfile_consumer
