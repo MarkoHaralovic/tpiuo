@@ -3,8 +3,12 @@ name: Consumer CI
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - '**.py'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - '**.py'
 
 jobs:
   editorconfig:
@@ -18,9 +22,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3
-
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
@@ -39,15 +40,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Connect to proper folder
-      uses: actions/checkout@v4
-      with:
-        sparse-checkout: 'prvi_zadatak/'
     - name: Log in to Azure
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-  
+
     - name: Build and deploy Container App
       uses: azure/container-apps-deploy-action@v1
       with:
