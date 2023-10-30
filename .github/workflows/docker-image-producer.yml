@@ -48,7 +48,7 @@ jobs:
       uses: azure/container-apps-deploy-action@v1
       with:
         appSourcePath: ${{ github.workspace }}
-        acrName: mojikontenjeri
+        acrName: mojikontenjeri/producer_image:v1
         containerAppName: producer-app
         resourceGroup: fervjestina
         dockerfilePath: ${{ github.workspace }}/prvi_zadatak/Dockerfile_producer
