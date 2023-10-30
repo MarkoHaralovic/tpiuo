@@ -48,6 +48,6 @@ jobs:
       uses: azure/container-apps-deploy-action@v1
       with:
         appSourcePath: ${{ github.workspace }}
-        acrName: mytestacr
-        containerAppName: my-test-container-app
-        resourceGroup: my-test-rg
+        acrName: consumer
+        containerAppName: consumer-app
+        resourceGroup: fervjestina
