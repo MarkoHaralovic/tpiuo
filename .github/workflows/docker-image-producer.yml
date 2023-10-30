@@ -43,11 +43,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Connect to proper folder
-      uses: actions/checkout@v4
-      with:
-        sparse-checkout: 'prvi_zadatak/'
-    
     - name: Log in to Azure
       uses: azure/login@v1
       with:
