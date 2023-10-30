@@ -47,7 +47,7 @@ jobs:
     - name: Build and deploy Container App
       uses: azure/container-apps-deploy-action@v1
       with:
-        appSourcePath: prvi_zadatak/producer.py
+        appSourcePath: prvi_zadatak/
         acrName: mojikontenjeri
         containerAppName: producer-app
         resourceGroup: fervjestina
