@@ -9,7 +9,8 @@ REDDIT_BASE_URL = "https://www.reddit.com/r/dataengineering/top/.json?t=all&limi
 HEADERS = {
     #limit could be added here, to reate a batch of 10 posts  
     "User-Agent": "Python/urllib"
-}  # gotten from https://github.com/reddit-archive/reddit/wiki/API#rules
+}  
+# gotten from https://github.com/reddit-archive/reddit/wiki/API#rules
 
 
 async def fetch_reddit_top_posts(after=None):
@@ -46,6 +47,7 @@ async def run():
                 event_data_batch.add(EventData(str(post_data)))
 
             await producer.send_batch(event_data_batch)
+            #creatin loop to send batch of 10 posts every 10 seconds
             await asyncio.sleep(10) 
 
 
