@@ -7,7 +7,7 @@ EVENT_HUB_CONNECTION_STR = "Endpoint=sb://labos1.servicebus.windows.net/;SharedA
 EVENT_HUB_NAME = "labos1_eventhub"
 REDDIT_BASE_URL = "https://www.reddit.com/r/dataengineering/top/.json?t=all&limit=10"
 HEADERS = {
-    #limit could be added here
+    #limit could be added here 
     "User-Agent": "Python/urllib"
 }  # gotten from https://github.com/reddit-archive/reddit/wiki/API#rules
 
