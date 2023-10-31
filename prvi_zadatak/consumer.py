@@ -3,7 +3,7 @@ from azure.eventhub.aio import EventHubConsumerClient
 
 EVENT_HUB_CONNECTION_STR = "Endpoint=sb://labos1.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=fenUEfj8GMD1r5u9A36xbh0WqGOoKfHVh+AEhBeuyBM="
 EVENT_HUB_NAME = "labos1_eventhub"
-CONSUMER_GROUP = "$Default"  # Using  the default consumer group ?? 
+CONSUMER_GROUP = "$Default"  # Using  the default consumer group ??    
 
 
 async def on_event(partition_context, event):
