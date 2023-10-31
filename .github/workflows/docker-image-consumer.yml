@@ -49,7 +49,7 @@ jobs:
       uses: azure/container-apps-deploy-action@v1
       with:
         appSourcePath: ${{ github.workspace }}
-        dockerfilePath: Dockerfile_consumer
+        dockerfilePath: prvi_zadatak.Dockerfile_consumer
         acrName: mojikontenjeri
         containerAppName: consumer-app
         resourceGroup: fervjestina

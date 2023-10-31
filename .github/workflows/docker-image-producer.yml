@@ -22,6 +22,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
@@ -49,7 +52,6 @@ jobs:
       uses: azure/container-apps-deploy-action@v1
       with:
         appSourcePath: ${{ github.workspace }}
-        dockerfilePath: Dockerfile_producer
         acrName: mojikontenjeri
         containerAppName: producer-app
         resourceGroup: fervjestina
