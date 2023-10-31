@@ -1,0 +1,5 @@
+asyncio
+aiohttp
+requests
+azure-eventhub
+azure-storage-file-datalake
