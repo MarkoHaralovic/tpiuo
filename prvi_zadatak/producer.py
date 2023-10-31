@@ -33,22 +33,20 @@ async def run():
         conn_str=EVENT_HUB_CONNECTION_STR, eventhub_name=EVENT_HUB_NAME
     )
     async with producer:
-        after = None
-        while True:
-            top_posts, after = await fetch_reddit_top_posts(after)
-            if not top_posts:
-                break
-            
-            event_data_batch = await producer.create_batch()
-            
-            for post in top_posts:
-                print(post)
-                post_data = post.get("data", {})
-                event_data_batch.add(EventData(str(post_data)))
+            after = None
+            for _ in range(100):  #sending maximum of 1000 posts
+                top_posts, after = await fetch_reddit_top_posts(after)
+                if not top_posts:
+                    break
+                
+                event_data_batch = await producer.create_batch()
+                
+                for post in top_posts:
+                    post_data = post.get("data", {})
+                    event_data_batch.add(EventData(str(post_data)))
 
-            await producer.send_batch(event_data_batch)
-            #creatin loop to send batch of 10 posts every 10 seconds
-            await asyncio.sleep(10) 
+                await producer.send_batch(event_data_batch)
+                await asyncio.sleep(10)  ##creating loop to send batch of 10 posts every 10 seconds
 
 
 asyncio.run(run())
