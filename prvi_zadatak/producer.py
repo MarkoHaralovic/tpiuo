@@ -1,5 +1,5 @@
 import asyncio
-import aiohttp
+import httpx
 import requests
 from azure.eventhub import EventData
 from azure.eventhub.aio import EventHubProducerClient
@@ -24,17 +24,17 @@ async def fetch_reddit_top_posts(after=None):
     if after:
         url += f"&after={after}"
     
-    async with aiohttp.ClientSession() as session:
-        try:
-            async with session.get(url, headers=HEADERS) as response:
-                response.raise_for_status()
-                data = await response.json()
-                if data:
-                    print("data")
-                return data.get("data", {}).get("children", []), data.get("data", {}).get("after")
-        except aiohttp.ClientError as e:
-            logger.error(f"Request failed: {e}")
-            return [], None
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(url, headers=HEADERS)
+            response.raise_for_status()
+            data = response.json()
+            if data:
+                print("data")
+            return data.get("data", {}).get("children", []), data.get("data", {}).get("after")
+    except httpx.HTTPError as e:
+        logger.error(f"Request failed: {e}")
+        return [], None
 
 
 async def run():

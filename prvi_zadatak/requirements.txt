@@ -1,5 +1,5 @@
 asyncio
-aiohttp
+httpx
 requests
 azure-eventhub
 azure-storage-file-datalake
