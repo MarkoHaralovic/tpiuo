@@ -26,18 +26,15 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.8
+          python-version: "3.11"
 
       - name: Install Python dependencies
         run: pip install black flake8
 
-      - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          black: true
-          flake8: true
+      - name: flake8 Lint
+        uses: py-actions/flake8@v2
   deploy:
     needs: [editorconfig,linter]
     runs-on: ubuntu-latest
@@ -52,6 +49,7 @@ jobs:
       uses: azure/container-apps-deploy-action@v1
       with:
         appSourcePath: ${{ github.workspace }}
+        dockerfilePath: Dockerfile_producer
         acrName: mojikontenjeri
         containerAppName: producer-app
         resourceGroup: fervjestina
