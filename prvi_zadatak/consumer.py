@@ -12,7 +12,7 @@ async def on_event(partition_context, event):
             event.body_as_str(encoding="UTF-8"), partition_context.partition_id
         )
     )
-
+ 
 
 consumer_client = EventHubConsumerClient.from_connection_string(
     conn_str=EVENT_HUB_CONNECTION_STR,
