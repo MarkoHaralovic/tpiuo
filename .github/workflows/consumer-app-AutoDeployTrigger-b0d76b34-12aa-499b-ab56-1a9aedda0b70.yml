@@ -1,0 +1,42 @@
+name: Trigger auto deployment for consumer-app
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - 'prvi_zadatak/Dockerfile_consumer/**'
+    - '.github/workflows/consumer-app-AutoDeployTrigger-b0d76b34-12aa-499b-ab56-1a9aedda0b70.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.CONSUMERAPP_AZURE_CREDENTIALS }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }}/prvi_zadatak/Dockerfile_consumer 
+          registryUrl: mojikontenjeri.azurecr.io
+          registryUsername: ${{ secrets.CONSUMERAPP_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.CONSUMERAPP_REGISTRY_PASSWORD }}
+          containerAppName: consumer-app
+          resourceGroup: fervjestina
+          imageToBuild: mojikontenjeri.azurecr.io/consumer-app:${{ github.sha }}
+          dockerfilePath: Dockerfile
+
+     
+
