@@ -23,6 +23,6 @@ consumer_client = EventHubConsumerClient.from_connection_string(
 try:
     asyncio.run(consumer_client.receive(on_event=on_event))
 except KeyboardInterrupt:
-    print("Receiving has stopped.")
+    print("Stopping the stream. Infomation flow will be stopped immediately.")
 finally:
     consumer_client.close()
