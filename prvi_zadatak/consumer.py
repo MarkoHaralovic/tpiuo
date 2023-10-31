@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 EVENT_HUB_CONNECTION_STR = "Endpoint=sb://labos1.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=fenUEfj8GMD1r5u9A36xbh0WqGOoKfHVh+AEhBeuyBM="
-EVENT_HUB_NAME = "eventhubfervjestina"
+EVENT_HUB_NAME = "eventhubfervjestina" #name of the event hub, connection string connects to eventspace where this event hub is
 CONSUMER_GROUP = "$Default"  # Using  the default consumer group    
 DATA_LAKE_ACCOUNT_NAME = 'tpioudatalake'
 DATA_LAKE_ACCOUNT_KEY = 'qdKc5IaalOQYOkKx7IcYrsYhNa1FrefWeC9g+Zg3tivqjf1HD4iEpXMpoIsBX1gnIB3bSE1/qlqg+AStpKwdBg=='
