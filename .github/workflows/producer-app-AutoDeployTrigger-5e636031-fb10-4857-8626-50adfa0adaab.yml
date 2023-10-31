@@ -1,0 +1,42 @@
+name: Trigger auto deployment for producer-app
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - 'prvi_zadatak/Dockerfile_producer/**'
+    - '.github/workflows/producer-app-AutoDeployTrigger-5e636031-fb10-4857-8626-50adfa0adaab.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.PRODUCERAPP_AZURE_CREDENTIALS }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }}/prvi_zadatak/Dockerfile_producer 
+          registryUrl: mojikontenjeri.azurecr.io
+          registryUsername: ${{ secrets.PRODUCERAPP_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.PRODUCERAPP_REGISTRY_PASSWORD }}
+          containerAppName: producer-app
+          resourceGroup: fervjestina
+          imageToBuild: mojikontenjeri.azurecr.io/producer-app:${{ github.sha }}
+          dockerfilePath: Dockerfile
+
+     
+
