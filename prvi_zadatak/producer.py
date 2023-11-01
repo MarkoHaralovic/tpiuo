@@ -62,7 +62,7 @@ async def run():
 
                 await producer.send_batch(event_data_batch)
                 logger.info(f"Sent batch of {len(top_posts)} posts to Event Hub.")
-                await asyncio.sleep(1)  ##creating loop to send batch of 10 posts every 10 seconds
+                await asyncio.sleep(10)  ##creating loop to send batch of 10 posts every 10 seconds
 
 
 if __name__ == "__main__":
@@ -72,3 +72,5 @@ if __name__ == "__main__":
         logger.info("Interrupted by user. Exiting...")
     except Exception as e:
         logger.error(f"An error occurred: {e}")
+    while True:
+        pass
