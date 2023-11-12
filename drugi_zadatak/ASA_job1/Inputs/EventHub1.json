@@ -4,7 +4,7 @@
     "DataSourceType": "Event Hub",
     "EventHubProperties": {
         "ServiceBusNamespace": "labos1",
-        "EventHubName": "eventhubfervjestina",
+        "EventHubName": "labos1eventhub",
         "SharedAccessPolicyName": "RootManageSharedAccessKey",
         "SharedAccessPolicyKey": "********",
         "ConsumerGroupName": "$Default",
