@@ -1,0 +1,14 @@
+{
+    "Name": "CosmosDB1",
+    "DataSourceType": "DocumentDB",
+    "DocumentDbProperties": {
+        "AccountId": "fervjestinadb",
+        "AccountKey": "********",
+        "Database": "RedditPostsFiltered",
+        "ContainerName": "RedditContainerDB",
+        "DocumentId": "",
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": "0aa1f090-78b0-429d-a03d-a55d9f3290c8.StreamAnalystics",
+    "ScriptType": "Output"
+}

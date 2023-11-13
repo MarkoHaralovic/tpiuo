@@ -7,8 +7,8 @@
             "AccountKey": "********"
         }],
         "Container": "asa1container",
-        "PathPattern": "YYYY/MM/DD/hh/mm",
-        "DateFormat": "{date}/{time}",
+        "PathPattern": "{date}/{time}",
+        "DateFormat": "yyyy/MM/dd",
         "TimeFormat": "HH/mm",
         "AuthenticationMode": "ConnectionString"
     },

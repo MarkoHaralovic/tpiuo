@@ -7,7 +7,25 @@
 
 SELECT
 	*
+   --  post.author AS author,
+   --  post.title AS title,
+   --  post.selftext AS content,  
+   --  post.ups AS ups,
+   --  post.downs AS downs,
+   --  post.upvote_ratio AS upvoteRatio, 
+   --  post.score AS score,
+   --  post.created_utc AS creationDate,  
+   --  post.num_comments AS numComments,  
+   --  DOCUMENTID(post)  AS documentId
+   --  CASE
+   --      WHEN post.is_video = true THEN 'video'
+   --      WHEN post.thumbnail != 'self' AND post.thumbnail != 'default' AND post.thumbnail != '' THEN 'image'
+   --      ELSE 'text'
+   --  END AS postType  -- Determining if the post is a video or image or text
 INTO
-	[YourOutputAlias]
+    CosmosDB1.RedditPostsFiltered
 FROM
-	[YourInputAlias]
+   EventHub1 
+	-- AS post
+-- WHERE
+--     post.num_comments > 0
