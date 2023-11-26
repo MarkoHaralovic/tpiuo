@@ -1,31 +1,31 @@
 
--- Before you begin
--- 1. Add input: right-click the Inputs folder and select "ASA: Add Input" to prepare your input data.
--- 2. Add output: right-click the Outputs folder and select "ASA: Add Output" to choose your sink type.
--- 3. Edit your query below and start testing your ASA job locally.
--- For more information, please visit: https://docs.microsoft.com/en-us/azure/stream-analytics/quick-create-visual-studio-code
+   -- Before you begin
+   -- 1. Add input: right-click the Inputs folder and select "ASA: Add Input" to prepare your input data.
+   -- 2. Add output: right-click the Outputs folder and select "ASA: Add Output" to choose your sink type.
+   -- 3. Edit your query below and start testing your ASA job locally.
+   -- For more information, please visit: https://docs.microsoft.com/en-us/azure/stream-analytics/quick-create-visual-studio-code
 
-SELECT
-	*
-   --  post.author AS author,
-   --  post.title AS title,
-   --  post.selftext AS content,  
-   --  post.ups AS ups,
-   --  post.downs AS downs,
-   --  post.upvote_ratio AS upvoteRatio, 
-   --  post.score AS score,
-   --  post.created_utc AS creationDate,  
-   --  post.num_comments AS numComments,  
-   --  DOCUMENTID(post)  AS documentId
-   --  CASE
-   --      WHEN post.is_video = true THEN 'video'
-   --      WHEN post.thumbnail != 'self' AND post.thumbnail != 'default' AND post.thumbnail != '' THEN 'image'
-   --      ELSE 'text'
-   --  END AS postType  -- Determining if the post is a video or image or text
-INTO
-    CosmosDB1.RedditPostsFiltered
-FROM
-   EventHub1 
-	-- AS post
--- WHERE
---     post.num_comments > 0
+   SELECT
+       author_fullname AS author_fullname,
+       title AS title,
+       selftext AS content,  
+       ups AS ups,
+       downs AS downs,
+       upvote_ratio AS upvoteRatio, 
+       score AS score,
+       created_utc AS creationDate,  
+       num_comments AS num_comments,
+       CASE
+           WHEN is_video = true THEN 'video'
+           WHEN thumbnail != 'self' AND thumbnail != 'default' AND thumbnail != '' THEN 'image'
+           ELSE 'text'
+       END AS postType 
+   INTO
+      CosmosDB1
+   FROM
+      EventHub1 
+         AS post
+   PARTITION BY author_fullname
+   WHERE
+     num_comments > 0
+   

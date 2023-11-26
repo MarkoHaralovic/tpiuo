@@ -4,6 +4,7 @@ from azure.eventhub import EventData
 from azure.eventhub.aio import EventHubProducerClient
 import json
 EVENT_HUB_CONNECTION_STR = "Endpoint=sb://labos1.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=6QvWYyyNRIDg8FCqPOxoufaNl++n5EiGt+AEhLHqXuY=;EntityPath=labos1eventhub"
+
 EVENT_HUB_NAME = "labos1eventhub" 
 REDDIT_BASE_URL = "https://www.reddit.com/r/dataengineering/top/.json?t=all&limit=10"
 HEADERS = {

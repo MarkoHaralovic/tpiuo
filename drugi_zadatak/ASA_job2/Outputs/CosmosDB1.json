@@ -4,8 +4,8 @@
     "DocumentDbProperties": {
         "AccountId": "fervjestinadb",
         "AccountKey": "********",
-        "Database": "RedditPostsFiltered",
-        "ContainerName": "RedditContainerDB",
+        "Database": "FilteredRedditPosts",
+        "ContainerName": "FilteredPostsContainer",
         "DocumentId": "",
         "AuthenticationMode": "ConnectionString"
     },
