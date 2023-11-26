@@ -8,6 +8,6 @@
 SELECT
 	*
 INTO
-	[YourOutputAlias]
+	DataLakeStorageGen2BlobStorage1
 FROM
-	[YourInputAlias]
+	EventHub1
