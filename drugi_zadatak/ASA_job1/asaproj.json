@@ -13,10 +13,6 @@
         {
             "filePath": "Inputs/EventHub1.json",
             "subType": "Input"
-        },
-        {
-            "filePath": "Outputs/DataLakeStorageGen2BlobStorage1.json",
-            "subType": "Output"
         }
     ]
 }
