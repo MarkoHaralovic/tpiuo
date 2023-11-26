@@ -7,10 +7,6 @@
             "subType": "JobConfig"
         },
         {
-            "filePath": "Inputs/undefined",
-            "subType": "Input"
-        },
-        {
             "filePath": "Inputs/EventHub1.json",
             "subType": "Input"
         }
