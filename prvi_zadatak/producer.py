@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
 EVENT_HUB_CONNECTION_STR = "Endpoint=sb://labos1.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=6QvWYyyNRIDg8FCqPOxoufaNl++n5EiGt+AEhLHqXuY=;EntityPath=labos1eventhub"
-EVENT_HUB_NAME = "eventhubfervjestina"  #name of the event hub, connection string connects to eventspace where this event hub is
+EVENT_HUB_NAME = "eventhubfervjestina"   #name of the event hub, connection string connects to eventspace where this event hub is
 CONSUMER_GROUP = "$Default"  # Using  the default consumer group    
 REDDIT_BASE_URL = "https://www.reddit.com/r/dataengineering/top/.json?t=all&limit=10"
 HEADERS = {
